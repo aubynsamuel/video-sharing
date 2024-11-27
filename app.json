@@ -3,9 +3,9 @@
     "name": "video-sharing",
     "slug": "video-sharing",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "video-sharing",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
