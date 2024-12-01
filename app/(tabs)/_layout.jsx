@@ -1,45 +1,74 @@
-import { View, Text } from "react-native";
 import React from "react";
 import { Tabs } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
+import { View } from "react-native";
 
 const TabLayout = () => {
-  const TabIcon = ({name}) => (
-    <MaterialIcons name={name} size={24} color={"black"} />
+  const TabIcon = ({ name, focused }) => (
+    <MaterialIcons
+      name={name}
+      size={28}
+      color={focused ? "#FFA001" : "white"}
+    />
   );
   return (
-    <>
-      <Tabs>
+    <View className="flex-1 bg-primary">
+      <Tabs
+        screenOptions={{
+          headerShown: false,
+          tabBarShowLabel: true,
+          tabBarIconStyle: { top: 15 },
+          tabBarActiveTintColor: "#FFA001",
+          tabBarInactiveTitColor: "#CDCDE0",
+          tabBarStyle: {
+            backgroundColor: "#161622",
+            borderTopWidth: 1,
+            borderTopColor: "#232533",
+            height: 84,
+          },
+          tabBarLabelStyle: {
+            top: 18,
+          },
+        }}
+      >
         <Tabs.Screen
-          name="index"
+          name="home"
           options={{
             title: "Home",
-            tabBarIcon:()=>( <TabIcon name={"home"} />),
-          }}
-        />
-        <Tabs.Screen
-          name="profile"
-          options={{
-            title: "Profile",
-            tabBarIcon:()=>( <TabIcon name={"person"} />),
+            tabBarIcon: ({ focused }) => (
+              <TabIcon focused={focused} name={"home"} />
+            ),
           }}
         />
         <Tabs.Screen
           name="bookmark"
           options={{
             title: "Bookmarks",
-            tabBarIcon:()=>( <TabIcon name={"bookmarks"} />),
+            tabBarIcon: ({ focused }) => (
+              <TabIcon focused={focused} name={"bookmark"} />
+            ),
           }}
         />
         <Tabs.Screen
           name="create"
           options={{
             title: "Create",
-            tabBarIcon:()=>( <TabIcon name={"create"} />),
+            tabBarIcon: ({ focused }) => (
+              <TabIcon focused={focused} name={"add-circle"} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="profile"
+          options={{
+            title: "Profile",
+            tabBarIcon: ({ focused }) => (
+              <TabIcon focused={focused} name={"person"} />
+            ),
           }}
         />
       </Tabs>
-    </>
+    </View>
   );
 };
 

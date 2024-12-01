@@ -1,12 +1,23 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
-import { Stack, Tabs } from "expo-router";
+import { Stack } from "expo-router";
+import "../global.css";
 
 const RootLayout = () => {
   return (
-   <Stack>
-    <Stack.Screen name="(tabs)"/>
-   </Stack>
+    <View className="flex-1 bg-primary">
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          navigationBarColor: "#161622",
+        }}
+      >
+        <Stack.Screen name="index" />
+        <Stack.Screen name="(auth)" />
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="search/[query]" />
+      </Stack>
+    </View>
   );
 };
 
