@@ -7,7 +7,7 @@ const TabLayout = () => {
   const TabIcon = ({ name, focused }) => (
     <MaterialIcons
       name={name}
-      size={28}
+      size={26}
       color={focused ? "#FFA001" : "white"}
     />
   );
@@ -23,10 +23,11 @@ const TabLayout = () => {
           tabBarStyle: {
             backgroundColor: "#161622",
             borderTopWidth: 1,
-            borderTopColor: "#232533",
-            height: 84,
+            borderColor: "#232533",
+            height: 80,
           },
           tabBarLabelStyle: {
+            fontSize:10,
             top: 18,
           },
         }}

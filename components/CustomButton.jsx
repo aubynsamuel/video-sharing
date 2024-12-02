@@ -1,7 +1,19 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React from "react";
 
-const CustomButton = ({ title, handlePress, textStyles, containerStyles, isLoading }) => {
+const CustomButton = ({
+  title,
+  handlePress,
+  textStyles,
+  containerStyles,
+  isLoading,
+}) => {
   return (
     <TouchableOpacity
       onPress={handlePress}
@@ -10,7 +22,11 @@ const CustomButton = ({ title, handlePress, textStyles, containerStyles, isLoadi
       className={`${containerStyles}`}
       disabled={isLoading}
     >
-      <Text style={[styles.TextStyles, textStyles ]}>{title}</Text>
+      {isLoading ? (
+        <ActivityIndicator size={"large"} color={"#161622"} />
+      ) : (
+        <Text style={[styles.TextStyles, textStyles]}>{title}</Text>
+      )}
     </TouchableOpacity>
   );
 };
@@ -26,9 +42,9 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
   },
-  TextStyles:{
-    fontWeight:"500", 
-    fontSize:18,
+  TextStyles: {
+    fontWeight: "500",
+    fontSize: 18,
     textAlign: "center",
-  }
+  },
 });

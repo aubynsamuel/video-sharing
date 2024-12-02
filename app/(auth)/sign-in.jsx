@@ -6,19 +6,40 @@ import {
   View,
   Image,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import images from "../../constants/images";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { Link, router } from "expo-router";
+import { signIn } from "../../lib/appwrite";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SingIn = () => {
+  const { setIsLoggedIn, setUser } = useGlobalContext();
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-  const submit = () => {};
+  const submit = async () => {
+    if (form.email === "" || form.password === "") {
+      Alert.alert("Error", "Please fill all the fields");
+      return
+    }
+    setIsSubmitting(true);
+    try {
+      const result =  await signIn(form.email, form.password);
+      setUser(result)
+      setIsLoggedIn(true)
+      console.log(`user ${form.email} has been signed in successfully`);
+      router.replace(" /home");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   const [isSubmitting, setIsSubmitting] = useState(false);
   return (
     <SafeAreaView className="bg-primary h-full">
