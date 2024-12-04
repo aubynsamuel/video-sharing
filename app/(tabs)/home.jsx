@@ -1,11 +1,9 @@
 import {
   FlatList,
   SafeAreaView,
-  StyleSheet,
   Text,
   View,
   Image,
-  RefreshControlComponent,
   RefreshControl,
 } from "react-native";
 import React, { useState } from "react";
@@ -13,28 +11,31 @@ import images from "../../constants/images";
 import SearchInput from "../../components/SearchInput";
 import Trending from "../../components/Trending";
 import EmptyState from "../../components/EmptyState";
+import {getAllPosts, getLatestPosts } from "../../lib/appwrite";
+import useAppwrite from "../../lib/useAppwrite";
+import VideoCard from "../../components/VideoCard";
 
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
+  const { data: posts, reFetch } = useAppwrite(getAllPosts);
+  const { data: latestPosts } = useAppwrite(getLatestPosts);
+
   const onRefresh = async () => {
     setRefreshing(true);
-    // re call to see if ant videos appear
+    await reFetch();
     setRefreshing(false);
   };
+  // console.log(latestPosts);
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
-        data={[]}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <Text className="text-3xl text-white">{item.id}</Text>
-        )}
+        data={posts}
+        keyExtractor={(item) => item.$id}
+        renderItem={({ item }) => <VideoCard video={item} />}
         refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-          />
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
+        showsVerticalScrollIndicator={false}
         className="mb-5"
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">
@@ -58,7 +59,7 @@ const Home = () => {
             <SearchInput />
             <View className="w-full flex-1 pb-8 pt-5">
               <Text className="text-gray-100 text-lg mb-3">Latest Videos</Text>
-              <Trending posts={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []} />
+              <Trending posts={latestPosts ?? []} />
             </View>
           </View>
         )}
@@ -74,5 +75,3 @@ const Home = () => {
 };
 
 export default Home;
-
-const styles = StyleSheet.create({});

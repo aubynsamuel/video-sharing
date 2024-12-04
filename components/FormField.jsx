@@ -1,12 +1,9 @@
 import {
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
   Image,
-  SafeAreaView,
-  ScrollView,
 } from "react-native";
 import React, { useState } from "react";
 import icons from "../constants/icons";
