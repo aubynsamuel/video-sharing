@@ -5,18 +5,17 @@ import icons from "../constants/icons";
 import { useVideoPlayer, VideoView } from "expo-video";
 
 const VideoCard = ({
-  video: {
+  Video: {
     title,
     thumbnail,
     video,
-    users: { username, avatar },
+    creator: { username, avatar },
   },
 }) => {
   const [play, setPlay] = useState(false);
 
-  const videoSource = require("../Lebron James Motivation - Mindset (Speech)(1080P_HD).mp4");
   // Initialize the video player
-  const player = useVideoPlayer(videoSource, (player) => {
+  const player = useVideoPlayer(video, (player) => {
     player.showNowPlayingNotification = true;
     player.loop = false; // No looping
     player.allowsExternalPlayback = false;
@@ -63,7 +62,7 @@ const VideoCard = ({
           />
         </TouchableOpacity>
       )}
-      <View className="flex-row gap-3 items-start mt-5">
+      <View className="flex-row gap-3 items-start mt-4">
         <View className="justify-center items-center flex-row flex-1">
           <View className="w-[46px] h-[46px] rounded-lg border justify-center items-center p-0.5">
             <Image
@@ -96,6 +95,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 210,
     borderRadius: 12,
+    marginTop: 24,
   },
 });
 export default VideoCard;

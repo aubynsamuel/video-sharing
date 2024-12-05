@@ -27,18 +27,18 @@ const Home = () => {
     await reFetch();
     setRefreshing(false);
   };
-  // console.log(latestPosts);
+  // console.log(posts);
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
         data={posts}
         keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => <VideoCard video={item} />}
+        renderItem={({ item }) => <VideoCard Video={item} />}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
+        horizontal={false}
         showsVerticalScrollIndicator={false}
-        className="mb-5"
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">
             <View className="justify-between flex-row mb-6 items-start">

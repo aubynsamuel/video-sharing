@@ -10,16 +10,25 @@ const GlobalProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
 
+  const setUpHome = async () => {
+    const currentUser = await getCurrentUser();
+    if (currentUser) {
+      setIsLoggedIn(true);
+      setUser(currentUser);
+    } else {
+      setIsLoggedIn(false);
+      setUser(null);
+    }
+  };
+
   useEffect(() => {
     const checkCurrentUser = async () => {
       try {
-        const currentUser = await getCurrentUser();
-        if (currentUser) {
-          setIsLoggedIn(true);
-          setUser(currentUser);
-        } else {
-          setIsLoggedIn(false);
-          setUser(null);
+        for (let i = 1; i <= 5; i++) {
+          if (isLoggedIn === false) {
+            setTimeout(setUpHome, 3000);
+            console.log(`Checking for the ${i}th time`);
+          }
         }
       } catch (error) {
         console.error("Error checking current user:", error);
@@ -29,7 +38,6 @@ const GlobalProvider = ({ children }) => {
         setIsLoading(false);
       }
     };
-
     checkCurrentUser();
   }, []);
 

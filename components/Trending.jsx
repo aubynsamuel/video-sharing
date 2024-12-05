@@ -32,9 +32,8 @@ const zoomOut = {
 const TrendingItem = ({ activeItem, item }) => {
   const [play, setPlay] = useState(false);
 
-  const videoSource = require("../Lebron James Motivation - Mindset (Speech)(1080P_HD).mp4");
   // Initialize the video player
-  const player = useVideoPlayer(videoSource, (player) => {
+  const player = useVideoPlayer(item.video, (player) => {
     player.showNowPlayingNotification = true;
     player.loop = false;
     player.allowsExternalPlayback = false;
