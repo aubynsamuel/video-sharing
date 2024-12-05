@@ -14,8 +14,10 @@ import EmptyState from "../../components/EmptyState";
 import {getAllPosts, getLatestPosts } from "../../lib/appwrite";
 import useAppwrite from "../../lib/useAppwrite";
 import VideoCard from "../../components/VideoCard";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Home = () => {
+  const { user, setIsLoggedIn, setUser } = useGlobalContext();
   const [refreshing, setRefreshing] = useState(false);
   const { data: posts, reFetch } = useAppwrite(getAllPosts);
   const { data: latestPosts } = useAppwrite(getLatestPosts);
@@ -45,7 +47,7 @@ const Home = () => {
                   Welcome Back
                 </Text>
                 <Text className="text-white text-2xl font-semibold">
-                  JS Mastery
+                  {user?.username}
                 </Text>
               </View>
               <View className="mt-1.5">
@@ -57,7 +59,7 @@ const Home = () => {
               </View>
             </View>
             <SearchInput />
-            <View className="w-full flex-1 pb-8 pt-5">
+            <View className="w-full flex-1 pb-2 pt-5">
               <Text className="text-gray-100 text-lg mb-3">Latest Videos</Text>
               <Trending posts={latestPosts ?? []} />
             </View>

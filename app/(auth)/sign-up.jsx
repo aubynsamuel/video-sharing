@@ -27,13 +27,13 @@ const SignUp = () => {
   const submit = async () => {
     if (form.email === "" || form.password === "" || form.username === "") {
       Alert.alert("Error", "Please fill all the fields");
-      return
+      return;
     }
     setIsSubmitting(true);
     try {
       const result = await register(form.email, form.password, form.username);
-      setUser(result)
-      setIsLoggedIn(true)
+      setUser(result);
+      setIsLoggedIn(true);
       console.log(`user ${form.username} has been created in successfully`);
       router.replace("/home");
     } catch (error) {

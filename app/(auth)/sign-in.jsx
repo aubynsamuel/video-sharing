@@ -12,7 +12,7 @@ import images from "../../constants/images";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
-import { signIn } from "../../lib/appwrite";
+import { getCurrentUser, signIn } from "../../lib/appwrite";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SingIn = () => {
@@ -24,15 +24,16 @@ const SingIn = () => {
   const submit = async () => {
     if (form.email === "" || form.password === "") {
       Alert.alert("Error", "Please fill all the fields");
-      return
+      return;
     }
     setIsSubmitting(true);
     try {
-      const result =  await signIn(form.email, form.password);
-      setUser(result)
-      setIsLoggedIn(true)
+      await signIn(form.email, form.password);
+      const result = await getCurrentUser()
+      setUser(result);
+      setIsLoggedIn(true);
       console.log(`user ${form.email} has been signed in successfully`);
-      router.replace(" /home");
+      router.replace("/home");
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {

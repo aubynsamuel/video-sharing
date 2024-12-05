@@ -3,7 +3,7 @@
     "name": "video-sharing",
     "slug": "video-sharing",
     "version": "1.0.0",
-    "orientation": "default",
+    "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "video-sharing",
     "userInterfaceStyle": "automatic",
