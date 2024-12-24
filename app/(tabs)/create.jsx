@@ -36,6 +36,7 @@ const Create = () => {
       mediaTypes: [SelectType],
       quality: 1,
       aspect: [4, 3],
+      allowsEditing: true,
     });
     if (!result.canceled) {
       if (SelectType === "images") {
